@@ -78,7 +78,7 @@ function App() {
             </PanelGroup>
           </Panel>
           <PanelResizeHandle className="w-full h-2 mx-auto duration-500 transition-all rounded-full"> <div className='bg-white/20 mx-auto h-full w-[5%] rounded-full' /> </PanelResizeHandle>
-          <Panel defaultSize={20}>
+          <Panel defaultSize={20} minSize={20} maxSize={20}>
             <div className='w-full flex h-full p-8 bg-[#26252A] rounded-xl'>
               <ImageSlider color={shades[5]} />
               <Loader shades100={shades[0]} />
