@@ -1,8 +1,6 @@
 import clsx, { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge'
-// Assuming TypeScript environment
 
-// Helper function to convert HEX to HSL with explicit return type
 function hexToHSL(H: string): [number, number, number] {
   let r = 0, g = 0, b = 0;
   if (H.length === 4) {
@@ -20,7 +18,7 @@ function hexToHSL(H: string): [number, number, number] {
   const max = Math.max(r, g, b), min = Math.min(r, g, b);
   let h, s, l = (max + min) / 2;
   if (max === min) {
-    h = s = 0; // achromatic
+    h = s = 0;
   } else {
     const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
@@ -29,12 +27,11 @@ function hexToHSL(H: string): [number, number, number] {
       case g: h = (b - r) / d + 2; break;
       case b: h = (r - g) / d + 4; break;
     }
-    h /= 6;
+    h! /= 6;
   }
-  return [h * 360, s * 100, l * 100]; // Explicitly a tuple of numbers
+  return [h! * 360, s * 100, l * 100];
 }
 
-// Helper function to convert HSL to HEX with explicit parameter types
 function hslToHex(h: number, s: number, l: number): string {
   l /= 100;
   const a = s * Math.min(l, 1 - l) / 100;
@@ -46,13 +43,11 @@ function hslToHex(h: number, s: number, l: number): string {
   return `#${f(0)}${f(8)}${f(4)}`;
 }
 
-// Function to generate shades with explicit types
 export function generateShades(hexColor: string, numberOfShades: number): string[] {
   const [h, s, l] = hexToHSL(hexColor);
   const shades: string[] = [];
   for (let i = 0; i < numberOfShades; i++) {
     const lightnessAdjustment = (l / numberOfShades) * i;
-    // Ensure parameters are numbers, TypeScript should infer this correctly
     shades.push(hslToHex(h, s, Math.max(Math.min(l - lightnessAdjustment, 100), 0)));
   }
   return shades;
