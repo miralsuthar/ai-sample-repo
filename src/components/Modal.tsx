@@ -24,7 +24,7 @@ export const Modal = ({ className, shades300, shades400, shades500, shades600, s
             <div style={{
               width: selectedTab === 1 ? `${tabRef1?.current?.getBoundingClientRect().width}px` : `${tabRef2?.current?.getBoundingClientRect().width}px`,
               left: selectedTab === 2 ? `${tabRef1.current?.getBoundingClientRect().width}px` : "0px"
-            }} className={cn("h-full absolute top-0 rounded-lg transition-all duration-300 ease-in-out left-0 bg-[#141417]")}></div>
+            }} className={cn("h-full absolute top-0 rounded-lg transition-all duration-300 ease-in-out w-[7rem] left-0 bg-[#141417]")}></div>
           </div>
         </div>
         <button onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} style={{

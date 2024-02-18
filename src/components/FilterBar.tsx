@@ -24,7 +24,7 @@ const Models = [
 export const FilterBar = ({ checkBoxColor, shades300 }: { checkBoxColor: string, shades300: string }) => {
   return (
     <div className="space-y-2">
-      <div className="space-y-[1.125rem] p-7 bg-[#201F23] rounded-xl">
+      <div className="space-y-[1.125rem] sticky top-0 p-7 bg-[#201F23] rounded-xl">
         <h1 className="text-2xl font-semibold text-white">AI Models</h1>
         <div className="flex gap-3">
           <DropDownSelector checkBoxColor={checkBoxColor} />
@@ -73,7 +73,7 @@ const ModelsList = ({ image, title, version, license, contributors, rating, shad
         <div className="text-white/60 w-20 text-sm">{license}</div>
         <div className="flex w-20">
           {contributors.map((person, index) => (
-            <img className={cn("", index > 0 && "-mr-3")} src={person} key={index} />
+            <img className={cn("", index < contributors.length && "-mr-3")} src={person} key={index} />
           ))}
         </div>
         <RatingStars rating={rating} color={shades300} />

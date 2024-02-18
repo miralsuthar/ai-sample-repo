@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import clockFace from '../assets/clockFace.png';
+import { cn } from '../../utils';
 export const Clock = () => {
   const [time, setTime] = useState(new Date());
 
@@ -18,8 +19,13 @@ export const Clock = () => {
   const minsDegrees = (minutes / 60) * 360 + (seconds / 60) * 6 + 90;
   const hourDegrees = (hours / 12) * 360 + (minutes / 60) * 30 + 90;
 
+  const [isClicked, setIsClicked] = useState(false);
   return (
-    <div className="clock relative w-[8.75rem] h-[8.75rem]" >
+    <div style={{
+      width: isClicked ? `158px` : `150px`,
+      height: isClicked ? `158px` : `150px`,
+      transform: isClicked ? `translateY(35px)` : `translateY(0px)`
+    }} onClick={() => setIsClicked(prev => !prev)} className={cn("clock transition-all ease-out rounded-full duration-500 relative w-[8.75rem] h-[8.75rem]", isClicked && "shadow-clockShadow")} >
       <img src={clockFace} alt="Clock face" className="clock-face w-full h-full bg-cover" draggable={false} />
       <div className="hand hour-hand" style={{ transform: `rotate(${hourDegrees}deg)` }} />
       <div className="hand min-hand" style={{ transform: `rotate(${minsDegrees}deg)` }} />

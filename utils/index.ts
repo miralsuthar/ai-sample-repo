@@ -49,6 +49,7 @@ export function generateShades(hexColor: string, numberOfShades: number): string
   for (let i = 0; i < numberOfShades; i++) {
     const lightnessAdjustment = (l / numberOfShades) * i;
     shades.push(hslToHex(h, s, Math.max(Math.min(l - lightnessAdjustment, 100), 0)));
+
   }
   return shades;
 }

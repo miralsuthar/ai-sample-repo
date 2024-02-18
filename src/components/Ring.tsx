@@ -1,8 +1,8 @@
-export const Ring = ({ className }: { className: string }) => {
+export const Ring = ({ className, color }: { className: string, color: string }) => {
   return (
     <div className={className}>
       <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="28" cy="28" r="27.5" stroke="#9681FF" />
+        <circle cx="28" cy="28" r="27.5" stroke={color} />
       </svg>
     </div>
   )
