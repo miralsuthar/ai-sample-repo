@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import dropDownIcon from '../assets/DropdownIcon.svg'
 import { cn } from "../../utils"
 
@@ -10,6 +10,24 @@ const filters = [
   { "id": 5, "value": "Full Stack" },
   { "id": 6, "value": "Graphic Designer" }
 ]
+
+const useClickOutside = (handler: () => void) => {
+  let domNode = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    let clickHandler = (event: any) => {
+      if (!domNode.current?.contains(event.target)) {
+        handler();
+      }
+    };
+
+    document.addEventListener('mousedown', clickHandler);
+
+    return () => document.removeEventListener('mousedown', clickHandler);
+  }, []);
+
+  return domNode;
+}
 
 const FilteredListItem = ({ value, checkBoxColor }: { value: string, checkBoxColor: string }) => {
   const [isHoverd, setIsHoverd] = useState(false);
@@ -37,14 +55,18 @@ const FilteredListItem = ({ value, checkBoxColor }: { value: string, checkBoxCol
 
 export const DropDownSelector = ({ checkBoxColor }: { checkBoxColor: string }) => {
   const [isOpen, setIsOpen] = useState(false)
-  return (
-    <div className="relative h-max">
-      <div
 
+  const nodeRef = useClickOutside(() => {
+    setIsOpen(false);
+  })
+
+  return (
+    <div className="relative h-max" ref={nodeRef}>
+      <div
         onClick={() => {
           setIsOpen((prev) => !prev);
         }}
-        className={cn("bg-[#17171A] cursor-pointer px-3 py-2 flex justify-between items-center gap-[0.3125rem] text-[13px] text-white w-max hover:bg-[#101012] rounded-full", isOpen && "bg-[#101012]")}>
+        className={cn("bg-[#17171A] select-none cursor-pointer px-3 py-2 flex justify-between items-center gap-[0.3125rem] text-[13px] text-white w-max hover:bg-[#101012] rounded-full", isOpen && "bg-[#101012]")}>
         Model
         <img src={dropDownIcon} className="w-[0.625rem] h-[0.625rem]" />
       </div>
